@@ -1,4 +1,5 @@
 import { Getters, Mutations, Actions, Module, createMapper } from 'vuex-smart-module';
+import logger from '~/util/logger';
 
 class QueryState {
   useSince: boolean = false;
@@ -9,16 +10,49 @@ class QueryState {
   since: string = new Date().toISOString().substr(0, 10);
   until: string = new Date().toISOString().substr(0, 10);
   filter: {
-    images?: boolean;
-    videos?: boolean;
-    news?: boolean;
-    replies?: boolean;
-    nativeretweets?: boolean;
-    links?: boolean;
-    verified?: boolean;
-    hashtags?: boolean;
-  } = {};
+    images: boolean;
+    videos: boolean;
+    news: boolean;
+    replies: boolean;
+    nativeretweets: boolean;
+    links: boolean;
+    verified: boolean;
+    hashtags: boolean;
+  } = {
+    images: false,
+    videos: false,
+    news: false,
+    replies: false,
+    nativeretweets: false,
+    links: false,
+    verified: false,
+    hashtags: false
+  };
   query: string[] = [];
+
+  asObject(): QueryState {
+    return Object.assign({}, this);
+  }
+
+  dehydrate() {
+    const object = this.asObject();
+    localStorage.setItem('data', JSON.stringify(object));
+
+    logger.info('dehydrated', object);
+  }
+
+  rehydrate(): void {
+    const data = localStorage.getItem('data');
+
+    if (data) {
+      const object = JSON.parse(data);
+      Object.assign(this, object);
+
+      logger.info('rehydrated', object);
+    } else {
+      this.dehydrate();
+    }
+  }
 }
 
 class QueryGetters extends Getters<QueryState> {

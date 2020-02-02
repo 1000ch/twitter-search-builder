@@ -175,7 +175,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import Clipboard from 'clipboard';
-import { queryMapper } from '~/store/modules/query';
+import { queryModule, queryMapper } from '~/store/modules/query';
 
 export default Vue.extend({
   computed: {
@@ -218,6 +218,12 @@ export default Vue.extend({
   },
   mounted() {
     new Clipboard('#copy');
+
+    queryModule.context(this.$store).state.rehydrate();
+
+    window.addEventListener('beforeunload', () => {
+      queryModule.context(this.$store).state.dehydrate();
+    });
   }
 });
 </script>
