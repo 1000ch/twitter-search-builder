@@ -1,16 +1,5 @@
 # twitter-search-query-builder
 
-``` bash
-# install dependencies
-$ npm install
+> GUI Tool to build a search query for Twitter
 
-# serve with hot reload at localhost:3000
-$ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm start
-
-# generate static project
-$ npm run generate
-```
+[![Netlify Status](https://api.netlify.com/api/v1/badges/02f98b20-3f58-4901-af25-9ddb8849c2e7/deploy-status)](https://app.netlify.com/sites/twitter-search-query-builder/deploys)
