@@ -20,6 +20,7 @@
     },
     "types": [
       "@types/node",
+      "@types/clipboard",
       "@nuxt/types",
       "@nuxtjs/axios"
     ],

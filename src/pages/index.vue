@@ -157,7 +157,12 @@
               <v-divider />
               <v-card-actions>
                 <v-spacer />
-                <v-btn text :href="searchUrl" target="_blank">Search on Twitter</v-btn>
+                <v-btn id="copy" :data-clipboard-text="searchText">
+                  Copy
+                </v-btn>
+                <v-btn text :href="searchUrl" target="_blank">
+                  Search on Twitter
+                </v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -169,6 +174,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import Clipboard from 'clipboard';
 import { queryMapper } from '~/store/modules/query';
 
 export default Vue.extend({
@@ -209,6 +215,9 @@ export default Vue.extend({
       'setFilterVerified',
       'setFilterHashTags'
     ])
+  },
+  mounted() {
+    new Clipboard('#copy');
   }
 });
 </script>
