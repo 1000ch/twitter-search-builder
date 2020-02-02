@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-app-bar app>
-      <v-toolbar-title>Twitter Search Query Builder</v-toolbar-title>
+      <v-toolbar-title>Twitter Search Builder</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon :href="searchUrl" target="_blank">
         <v-icon>mdi-magnify</v-icon>
