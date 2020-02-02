@@ -9,7 +9,7 @@
     </v-app-bar>
 
     <v-content>
-      <v-container fluid class="pa-12">
+      <v-container fluid class="pa-4">
         <v-row dense>
           <v-col cols="12">
             <v-card>
