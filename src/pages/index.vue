@@ -40,6 +40,7 @@
                 <v-btn icon @click="setUseSince(!useSince)">
                   <v-icon>{{ useSince ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
                 </v-btn>
+                <v-spacer />
               </v-card-actions>
               <v-expand-transition>
                 <div v-show="useSince" class="pa-4">
@@ -62,6 +63,7 @@
                 <v-btn icon @click="setUseUntil(!useUntil)">
                   <v-icon>{{ useUntil ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
                 </v-btn>
+                <v-spacer />
               </v-card-actions>
               <v-expand-transition>
                 <div v-show="useUntil" class="pa-4">
@@ -84,6 +86,7 @@
                 <v-btn icon @click="setUseFilter(!useFilter)">
                   <v-icon>{{ useFilter ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
                 </v-btn>
+                <v-spacer />
               </v-card-actions>
               <v-expand-transition>
                 <div v-show="useFilter" class="pa-4">
@@ -157,12 +160,13 @@
               <v-divider />
               <v-card-actions>
                 <v-spacer />
-                <v-btn id="copy" :data-clipboard-text="searchText">
+                <v-btn text id="copy" :data-clipboard-text="searchText">
                   Copy
                 </v-btn>
                 <v-btn text :href="searchUrl" target="_blank">
                   Search on Twitter
                 </v-btn>
+                <v-spacer />
               </v-card-actions>
             </v-card>
           </v-col>
