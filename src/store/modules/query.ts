@@ -151,11 +151,11 @@ class QueryMutations extends Mutations<QueryState> {
       }
     }
 
-    if (this.state.useSince && this.state.since) {
+    if (this.state.useSince) {
       this.state.query.push(`since:${this.state.since}`);
     }
 
-    if (this.state.useUntil && this.state.until) {
+    if (this.state.useUntil) {
       this.state.query.push(`until:${this.state.until}`);
     }
 
