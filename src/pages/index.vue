@@ -15,20 +15,32 @@
             <v-card>
               <v-card-title>Users</v-card-title>
               <v-card-subtitle>You can speficy users.</v-card-subtitle>
-              <div class="d-flex flex-column pa-4">
-                <v-text-field
-                  label="From"
-                  prepend-icon="mdi-account"
-                  :value="from"
-                  @change="setFrom"
-                />
-                <v-text-field
-                  label="To"
-                  prepend-icon="mdi-account"
-                  :value="to"
-                  @change="setTo"
-                />
-              </div>
+              <v-card-actions>
+                <v-spacer />
+                <v-btn icon @click="setUseUser(!useUser)">
+                  <v-icon>{{ useUser ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+                </v-btn>
+                <v-spacer />
+              </v-card-actions>
+              <v-expand-transition>
+                <div v-show="useUser" class="pa-4">
+                  <v-divider class="mb-4" />
+                  <div class="d-flex flex-column pa-4">
+                    <v-text-field
+                      label="From"
+                      prepend-icon="mdi-account"
+                      :value="from"
+                      @change="setFrom"
+                    />
+                    <v-text-field
+                      label="To"
+                      prepend-icon="mdi-account"
+                      :value="to"
+                      @change="setTo"
+                    />
+                  </div>
+                </div>
+              </v-expand-transition>
             </v-card>
           </v-col>
           <v-col cols="12">
@@ -184,6 +196,7 @@ import { queryModule, queryMapper } from '~/store/modules/query';
 export default Vue.extend({
   computed: {
     ...queryMapper.mapGetters([
+      'useUser',
       'useSince',
       'useUntil',
       'useFilter',
@@ -203,6 +216,7 @@ export default Vue.extend({
   },
   methods: {
     ...queryMapper.mapActions([
+      'setUseUser',
       'setUseSince',
       'setUseUntil',
       'setUseFilter',

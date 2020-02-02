@@ -2,6 +2,7 @@ import { Getters, Mutations, Actions, Module, createMapper } from 'vuex-smart-mo
 import logger from '~/util/logger';
 
 class QueryState {
+  useUser: boolean = true;
   useSince: boolean = false;
   useUntil: boolean = false;
   useFilter: boolean = false;
@@ -56,6 +57,9 @@ class QueryState {
 }
 
 class QueryGetters extends Getters<QueryState> {
+  get useUser(): boolean {
+    return this.state.useUser;
+  }
   get useSince(): boolean {
     return this.state.useSince;
   }
@@ -86,6 +90,9 @@ class QueryGetters extends Getters<QueryState> {
 }
 
 class QueryMutations extends Mutations<QueryState> {
+  setUseUser(useUser: boolean) {
+    this.state.useUser = useUser;
+  }
   setUseSince(useSince: boolean) {
     this.state.useSince = useSince;
   }
@@ -134,12 +141,14 @@ class QueryMutations extends Mutations<QueryState> {
   generateQuery() {
     this.state.query.length = 0;
 
-    if (this.state.from) {
-      this.state.query.push(`from:${this.state.from}`);
-    }
+    if (this.state.useUser) {
+      if (this.state.from) {
+        this.state.query.push(`from:${this.state.from}`);
+      }
 
-    if (this.state.to) {
-      this.state.query.push(`to:${this.state.to}`);
+      if (this.state.to) {
+        this.state.query.push(`to:${this.state.to}`);
+      }
     }
 
     if (this.state.useSince && this.state.since) {
@@ -161,6 +170,10 @@ class QueryMutations extends Mutations<QueryState> {
 }
 
 class QueryActions extends Actions<QueryState, QueryGetters, QueryMutations, QueryMutations> {
+  setUseUser(useUser: boolean) {
+    this.mutations.setUseUser(useUser);
+    this.mutations.generateQuery();
+  }
   setUseSince(useSince: boolean) {
     this.mutations.setUseSince(useSince);
     this.mutations.generateQuery();
