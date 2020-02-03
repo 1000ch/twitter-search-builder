@@ -140,6 +140,24 @@
                 <div v-show="useFilter" class="pa-4">
                   <div class="d-flex flex-column">
                     <v-checkbox
+                      label="Filter Positive"
+                      prepend-icon="mdi-heart"
+                      :value="filter.positive"
+                      @change="setFilterPositive"
+                    />
+                    <v-checkbox
+                      label="Filter Negative"
+                      prepend-icon="mdi-heart-broken"
+                      :value="filter.negative"
+                      @change="setFilterNegative"
+                    />
+                    <v-checkbox
+                      label="Filter Question"
+                      prepend-icon="mdi-comment-question-outline"
+                      :value="filter.question"
+                      @change="setFilterQuestion"
+                    />
+                    <v-checkbox
                       label="Filter Images"
                       prepend-icon="mdi-image"
                       :value="filter.images"
@@ -158,6 +176,12 @@
                       @change="setFilterNews"
                     />
                     <v-checkbox
+                      label="Filter Safe"
+                      prepend-icon="mdi-safety-goggles"
+                      :value="filter.safe"
+                      @change="setFilterSafe"
+                    />
+                    <v-checkbox
                       label="Filter Replies"
                       prepend-icon="mdi-reply"
                       :value="filter.replies"
@@ -165,6 +189,12 @@
                     />
                     <v-checkbox
                       label="Filter Retweets"
+                      prepend-icon="mdi-twitter-retweet"
+                      :value="filter.retweets"
+                      @change="setFilterRetweets"
+                    />
+                    <v-checkbox
+                      label="Filter Native Retweets"
                       prepend-icon="mdi-twitter-retweet"
                       :value="filter.nativeretweets"
                       @change="setFilterNativeRetweets"
@@ -286,10 +316,15 @@ export default Vue.extend({
       'setTo',
       'setSince',
       'setUntil',
+      'setFilterPositive',
+      'setFilterNegative',
+      'setFilterQuestion',
       'setFilterImages',
       'setFilterVideos',
       'setFilterNews',
+      'setFilterSafe',
       'setFilterReplies',
+      'setFilterRetweets',
       'setFilterNativeRetweets',
       'setFilterLinks',
       'setFilterVerified',

@@ -12,19 +12,29 @@ class QueryState {
   since: string = new Date().toISOString().substr(0, 10);
   until: string = new Date().toISOString().substr(0, 10);
   filter: {
+    positive: boolean;
+    negative: boolean;
+    question: boolean;
     images: boolean;
     videos: boolean;
     news: boolean;
+    safe: boolean;
     replies: boolean;
+    retweets: boolean;
     nativeretweets: boolean;
     links: boolean;
     verified: boolean;
     hashtags: boolean;
   } = {
+    positive: false,
+    negative: false,
+    question: false,
     images: false,
     videos: false,
     news: false,
+    safe: false,
     replies: false,
+    retweets: false,
     nativeretweets: false,
     links: false,
     verified: false,
@@ -121,6 +131,15 @@ class QueryMutations extends Mutations<QueryState> {
   setUntil(until: string) {
     this.state.until = until;
   }
+  setFilterPositive(positive: boolean) {
+    this.state.filter.positive = positive;
+  }
+  setFilterNegative(negative: boolean) {
+    this.state.filter.negative = negative;
+  }
+  setFilterQuestion(question: boolean) {
+    this.state.filter.question = question;
+  }
   setFilterImages(images: boolean) {
     this.state.filter.images = images;
   }
@@ -130,8 +149,14 @@ class QueryMutations extends Mutations<QueryState> {
   setFilterNews(news: boolean) {
     this.state.filter.news = news;
   }
+  setFilterSafe(safe: boolean) {
+    this.state.filter.safe = safe;
+  }
   setFilterReplies(replies: boolean) {
     this.state.filter.replies = replies;
+  }
+  setFilterRetweets(retweets: boolean) {
+    this.state.filter.retweets = retweets;
   }
   setFilterNativeRetweets(nativeretweets: boolean) {
     this.state.filter.nativeretweets = nativeretweets;
@@ -168,9 +193,17 @@ class QueryMutations extends Mutations<QueryState> {
     }
 
     if (this.state.useFilter) {
-      for (let [key, value] of Object.entries(this.state.filter)) {
+      for (const [key, value] of Object.entries(this.state.filter)) {
         if (value) {
-          this.state.query.push(`filter:${key}`);
+          if (key === 'positive') {
+            this.state.query.push(':)');
+          } else if (key === 'negative') {
+            this.state.query.push(':(');
+          } else if (key === 'question') {
+            this.state.query.push('?');
+          } else {
+            this.state.query.push(`filter:${key}`);
+          }
         }
       }
     }
@@ -214,6 +247,18 @@ class QueryActions extends Actions<QueryState, QueryGetters, QueryMutations, Que
     this.mutations.setUntil(until);
     this.mutations.generateQuery();
   }
+  setFilterPositive(positive: boolean) {
+    this.mutations.setFilterPositive(positive);
+    this.mutations.generateQuery();
+  }
+  setFilterNegative(negative: boolean) {
+    this.mutations.setFilterNegative(negative);
+    this.mutations.generateQuery();
+  }
+  setFilterQuestion(question: boolean) {
+    this.mutations.setFilterQuestion(question);
+    this.mutations.generateQuery();
+  }
   setFilterImages(images: boolean) {
     this.mutations.setFilterImages(images);
     this.mutations.generateQuery();
@@ -226,8 +271,16 @@ class QueryActions extends Actions<QueryState, QueryGetters, QueryMutations, Que
     this.mutations.setFilterNews(news);
     this.mutations.generateQuery();
   }
+  setFilterSafe(safe: boolean) {
+    this.mutations.setFilterSafe(safe);
+    this.mutations.generateQuery();
+  }
   setFilterReplies(replies: boolean) {
     this.mutations.setFilterReplies(replies);
+    this.mutations.generateQuery();
+  }
+  setFilterRetweets(retweets: boolean) {
+    this.mutations.setFilterRetweets(retweets);
     this.mutations.generateQuery();
   }
   setFilterNativeRetweets(nativeretweets: boolean) {
