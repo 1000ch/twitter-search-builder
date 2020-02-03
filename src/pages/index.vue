@@ -13,7 +13,12 @@
         <v-row dense>
           <v-col cols="12">
             <v-card>
-              <v-card-title>Text</v-card-title>
+              <v-card-title>
+                <v-icon class="mr-1" :color="isTextEnabled ? 'green' : 'grey lighten-2'">
+                  {{ isTextEnabled ? 'mdi-check-box-outline' : 'mdi-checkbox-blank-outline' }}
+                </v-icon>
+                Text
+              </v-card-title>
               <v-card-subtitle>You can specify search text.</v-card-subtitle>
               <div class="pa-4">
                 <v-text-field
@@ -27,7 +32,12 @@
           </v-col>
           <v-col cols="12">
             <v-card>
-              <v-card-title>Users</v-card-title>
+              <v-card-title>
+                <v-icon class="mr-1" :color="isUserEnabled ? 'green' : 'grey lighten-2'">
+                  {{ isUserEnabled ? 'mdi-check-box-outline' : 'mdi-checkbox-blank-outline' }}
+                </v-icon>
+                Users
+              </v-card-title>
               <v-card-subtitle>You can specify users.</v-card-subtitle>
               <v-card-actions>
                 <v-spacer />
@@ -58,7 +68,12 @@
           </v-col>
           <v-col cols="12">
             <v-card>
-              <v-card-title>Since</v-card-title>
+              <v-card-title>
+                <v-icon class="mr-1" :color="isSinceEnabled ? 'green' : 'grey lighten-2'">
+                  {{ isSinceEnabled ? 'mdi-check-box-outline' : 'mdi-checkbox-blank-outline' }}
+                </v-icon>
+                Since
+              </v-card-title>
               <v-card-subtitle>You can specify since date.</v-card-subtitle>
               <v-card-actions>
                 <v-spacer />
@@ -80,7 +95,12 @@
           </v-col>
           <v-col cols="12">
             <v-card>
-              <v-card-title>Until</v-card-title>
+              <v-card-title>
+                <v-icon class="mr-1" :color="isUntilEnabled ? 'green' : 'grey lighten-2'">
+                  {{ isUntilEnabled ? 'mdi-check-box-outline' : 'mdi-checkbox-blank-outline' }}
+                </v-icon>
+                Until
+              </v-card-title>
               <v-card-subtitle>You can specify until date.</v-card-subtitle>
               <v-card-actions>
                 <v-spacer />
@@ -102,7 +122,12 @@
           </v-col>
           <v-col cols="12">
             <v-card>
-              <v-card-title>Filters</v-card-title>
+              <v-card-title>
+                <v-icon class="mr-1" :color="isFilterEnabled ? 'green' : 'grey lighten-2'">
+                  {{ isFilterEnabled ? 'mdi-check-box-outline' : 'mdi-checkbox-blank-outline' }}
+                </v-icon>
+                Filters
+              </v-card-title>
               <v-card-subtitle>You can specify filters.</v-card-subtitle>
               <v-card-actions>
                 <v-spacer />
@@ -218,6 +243,31 @@ export default Vue.extend({
       'filter',
       'query'
     ]),
+    isTextEnabled(): boolean {
+      return this.text.length !== 0;
+    },
+    isUserEnabled(): boolean {
+      if (!this.useUser) {
+        return false;
+      }
+
+      return this.from.length !== 0 || this.to.length !== 0;
+    },
+    isSinceEnabled(): boolean {
+      return this.useSince;
+    },
+    isUntilEnabled(): boolean {
+      return this.useUntil;
+    },
+    isFilterEnabled(): boolean {
+      if (!this.useFilter) {
+        return false;
+      }
+
+      return Object.entries(this.filter).some(entry => {
+        return Boolean(entry[1]);
+      });
+    },
     searchText(): string {
       return this.query.join(' ');
     },
