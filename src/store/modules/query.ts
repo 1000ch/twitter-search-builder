@@ -6,6 +6,7 @@ class QueryState {
   useSince: boolean = false;
   useUntil: boolean = false;
   useFilter: boolean = false;
+  text: string = '';
   from: string = '';
   to: string = '';
   since: string = new Date().toISOString().substr(0, 10);
@@ -69,6 +70,9 @@ class QueryGetters extends Getters<QueryState> {
   get useFilter(): boolean {
     return this.state.useFilter;
   }
+  get text(): string {
+    return this.state.text;
+  }
   get from(): string {
     return this.state.from;
   }
@@ -105,6 +109,9 @@ class QueryMutations extends Mutations<QueryState> {
   setFrom(from: string) {
     this.state.from = from;
   }
+  setText(text: string) {
+    this.state.text = text;
+  }
   setTo(to: string) {
     this.state.to = to;
   }
@@ -140,6 +147,7 @@ class QueryMutations extends Mutations<QueryState> {
   }
   generateQuery() {
     this.state.query.length = 0;
+    this.state.query.push(this.state.text);
 
     if (this.state.useUser) {
       if (this.state.from) {
@@ -184,6 +192,10 @@ class QueryActions extends Actions<QueryState, QueryGetters, QueryMutations, Que
   }
   setUseFilter(useFilter: boolean) {
     this.mutations.setUseFilter(useFilter);
+    this.mutations.generateQuery();
+  }
+  setText(text: string) {
+    this.mutations.setText(text);
     this.mutations.generateQuery();
   }
   setFrom(from: string) {

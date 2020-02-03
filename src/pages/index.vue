@@ -13,8 +13,22 @@
         <v-row dense>
           <v-col cols="12">
             <v-card>
+              <v-card-title>Text</v-card-title>
+              <v-card-subtitle>You can specify search text.</v-card-subtitle>
+              <div class="pa-4">
+                <v-text-field
+                  label="Text"
+                  prepend-icon="mdi-card-text"
+                  :value="text"
+                  @change="setText"
+                />
+              </div>
+            </v-card>
+          </v-col>
+          <v-col cols="12">
+            <v-card>
               <v-card-title>Users</v-card-title>
-              <v-card-subtitle>You can speficy users.</v-card-subtitle>
+              <v-card-subtitle>You can specify users.</v-card-subtitle>
               <v-card-actions>
                 <v-spacer />
                 <v-btn icon @click="setUseUser(!useUser)">
@@ -23,8 +37,7 @@
                 <v-spacer />
               </v-card-actions>
               <v-expand-transition>
-                <div v-show="useUser" class="pa-4">
-                  <v-divider class="mb-4" />
+                <div v-show="useUser">
                   <div class="d-flex flex-column pa-4">
                     <v-text-field
                       label="From"
@@ -46,7 +59,7 @@
           <v-col cols="12">
             <v-card>
               <v-card-title>Since</v-card-title>
-              <v-card-subtitle>You can speficy since date.</v-card-subtitle>
+              <v-card-subtitle>You can specify since date.</v-card-subtitle>
               <v-card-actions>
                 <v-spacer />
                 <v-btn icon @click="setUseSince(!useSince)">
@@ -56,7 +69,6 @@
               </v-card-actions>
               <v-expand-transition>
                 <div v-show="useSince" class="pa-4">
-                  <v-divider class="mb-4" />
                   <v-date-picker
                     prepend-icon="mdi-calendar"
                     :value="since"
@@ -69,7 +81,7 @@
           <v-col cols="12">
             <v-card>
               <v-card-title>Until</v-card-title>
-              <v-card-subtitle>You can speficy until date.</v-card-subtitle>
+              <v-card-subtitle>You can specify until date.</v-card-subtitle>
               <v-card-actions>
                 <v-spacer />
                 <v-btn icon @click="setUseUntil(!useUntil)">
@@ -79,7 +91,6 @@
               </v-card-actions>
               <v-expand-transition>
                 <div v-show="useUntil" class="pa-4">
-                  <v-divider class="mb-4" />
                   <v-date-picker
                     prepend-icon="mdi-calendar"
                     :value="until"
@@ -102,7 +113,6 @@
               </v-card-actions>
               <v-expand-transition>
                 <div v-show="useFilter" class="pa-4">
-                  <v-divider class="mb-4" />
                   <div class="d-flex flex-column">
                     <v-checkbox
                       label="Filter Images"
@@ -200,6 +210,7 @@ export default Vue.extend({
       'useSince',
       'useUntil',
       'useFilter',
+      'text',
       'from',
       'to',
       'since',
@@ -220,6 +231,7 @@ export default Vue.extend({
       'setUseSince',
       'setUseUntil',
       'setUseFilter',
+      'setText',
       'setFrom',
       'setTo',
       'setSince',
