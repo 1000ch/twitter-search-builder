@@ -201,14 +201,14 @@
                   readonly
                   label="Search Query"
                   prepend-icon="mdi-twitter"
-                  :value="searchText"
+                  :value="searchQuery"
                 />
               </div>
               <v-divider />
               <v-card-actions>
                 <v-spacer />
-                <v-btn text id="copy" :data-clipboard-text="searchText">
-                  Copy
+                <v-btn text id="copy" :data-clipboard-text="searchQuery">
+                  Copy search query
                 </v-btn>
                 <v-btn text :href="searchUrl" target="_blank">
                   Search on Twitter
@@ -264,15 +264,15 @@ export default Vue.extend({
         return false;
       }
 
-      return Object.entries(this.filter).some(entry => {
-        return Boolean(entry[1]);
+      return Object.entries(this.filter).some(([key, value]) => {
+        return Boolean(value);
       });
     },
-    searchText(): string {
+    searchQuery(): string {
       return this.query.join(' ');
     },
     searchUrl(): string {
-      return `https://twitter.com/search?q=${this.searchText}`;
+      return `https://twitter.com/search?q=${this.searchQuery}`;
     }
   },
   methods: {
@@ -299,10 +299,11 @@ export default Vue.extend({
   mounted() {
     new Clipboard('#copy');
 
-    queryModule.context(this.$store).state.rehydrate();
+    const queryStore = queryModule.context(this.$store);
+    queryStore.state.rehydrate();
 
     window.addEventListener('beforeunload', () => {
-      queryModule.context(this.$store).state.dehydrate();
+      queryStore.state.dehydrate();
     });
   }
 });
