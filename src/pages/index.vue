@@ -270,8 +270,7 @@ export default Vue.extend({
       'to',
       'since',
       'until',
-      'filter',
-      'query'
+      'filter'
     ]),
     isTextEnabled(): boolean {
       return this.text.length !== 0;
@@ -299,7 +298,7 @@ export default Vue.extend({
       });
     },
     searchQuery(): string {
-      return this.query.join(' ');
+      return this.generateQuery().join(' ');
     },
     searchUrl(): string {
       return `https://twitter.com/search?q=${this.searchQuery}`;
@@ -329,7 +328,46 @@ export default Vue.extend({
       'setFilterLinks',
       'setFilterVerified',
       'setFilterHashTags'
-    ])
+    ]),
+    generateQuery(): string[] {
+      const query = [this.text];
+
+      if (this.useUser) {
+        if (this.from) {
+          query.push(`from:${this.from}`);
+        }
+
+        if (this.to) {
+          query.push(`to:${this.to}`);
+        }
+      }
+
+      if (this.useSince) {
+        query.push(`since:${this.since}`);
+      }
+
+      if (this.useUntil) {
+        query.push(`until:${this.until}`);
+      }
+
+      if (this.useFilter) {
+        for (const [key, value] of Object.entries(this.filter)) {
+          if (value) {
+            if (key === 'positive') {
+              query.push(':)');
+            } else if (key === 'negative') {
+              query.push(':(');
+            } else if (key === 'question') {
+              query.push('?');
+            } else {
+              query.push(`filter:${key}`);
+            }
+          }
+        }
+      }
+
+      return query;
+    }
   },
   mounted() {
     new Clipboard('#copy');

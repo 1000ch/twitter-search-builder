@@ -40,7 +40,6 @@ class QueryState {
     verified: false,
     hashtags: false
   };
-  query: string[] = [];
 
   asObject(): QueryState {
     return Object.assign({}, this);
@@ -97,9 +96,6 @@ class QueryGetters extends Getters<QueryState> {
   }
   get filter(): object {
     return this.state.filter;
-  }
-  get query(): string[] {
-    return this.state.query;
   }
 }
 
@@ -170,134 +166,74 @@ class QueryMutations extends Mutations<QueryState> {
   setFilterHashTags(hashtags: boolean) {
     this.state.filter.hashtags = hashtags;
   }
-  generateQuery() {
-    this.state.query.length = 0;
-    this.state.query.push(this.state.text);
-
-    if (this.state.useUser) {
-      if (this.state.from) {
-        this.state.query.push(`from:${this.state.from}`);
-      }
-
-      if (this.state.to) {
-        this.state.query.push(`to:${this.state.to}`);
-      }
-    }
-
-    if (this.state.useSince) {
-      this.state.query.push(`since:${this.state.since}`);
-    }
-
-    if (this.state.useUntil) {
-      this.state.query.push(`until:${this.state.until}`);
-    }
-
-    if (this.state.useFilter) {
-      for (const [key, value] of Object.entries(this.state.filter)) {
-        if (value) {
-          if (key === 'positive') {
-            this.state.query.push(':)');
-          } else if (key === 'negative') {
-            this.state.query.push(':(');
-          } else if (key === 'question') {
-            this.state.query.push('?');
-          } else {
-            this.state.query.push(`filter:${key}`);
-          }
-        }
-      }
-    }
-  }
 }
 
 class QueryActions extends Actions<QueryState, QueryGetters, QueryMutations, QueryMutations> {
   setUseUser(useUser: boolean) {
     this.mutations.setUseUser(useUser);
-    this.mutations.generateQuery();
   }
   setUseSince(useSince: boolean) {
     this.mutations.setUseSince(useSince);
-    this.mutations.generateQuery();
   }
   setUseUntil(useUntil: boolean) {
     this.mutations.setUseUntil(useUntil);
-    this.mutations.generateQuery();
   }
   setUseFilter(useFilter: boolean) {
     this.mutations.setUseFilter(useFilter);
-    this.mutations.generateQuery();
   }
   setText(text: string) {
     this.mutations.setText(text);
-    this.mutations.generateQuery();
   }
   setFrom(from: string) {
     this.mutations.setFrom(from);
-    this.mutations.generateQuery();
   }
   setTo(to: string) {
     this.mutations.setTo(to);
-    this.mutations.generateQuery();
   }
   setSince(since: string) {
     this.mutations.setSince(since);
-    this.mutations.generateQuery();
   }
   setUntil(until: string) {
     this.mutations.setUntil(until);
-    this.mutations.generateQuery();
   }
   setFilterPositive(positive: boolean) {
     this.mutations.setFilterPositive(positive);
-    this.mutations.generateQuery();
   }
   setFilterNegative(negative: boolean) {
     this.mutations.setFilterNegative(negative);
-    this.mutations.generateQuery();
   }
   setFilterQuestion(question: boolean) {
     this.mutations.setFilterQuestion(question);
-    this.mutations.generateQuery();
   }
   setFilterImages(images: boolean) {
     this.mutations.setFilterImages(images);
-    this.mutations.generateQuery();
   }
   setFilterVideos(videos: boolean) {
     this.mutations.setFilterVideos(videos);
-    this.mutations.generateQuery();
   }
   setFilterNews(news: boolean) {
     this.mutations.setFilterNews(news);
-    this.mutations.generateQuery();
   }
   setFilterSafe(safe: boolean) {
     this.mutations.setFilterSafe(safe);
-    this.mutations.generateQuery();
   }
   setFilterReplies(replies: boolean) {
     this.mutations.setFilterReplies(replies);
-    this.mutations.generateQuery();
   }
   setFilterRetweets(retweets: boolean) {
     this.mutations.setFilterRetweets(retweets);
-    this.mutations.generateQuery();
   }
   setFilterNativeRetweets(nativeretweets: boolean) {
     this.mutations.setFilterNativeRetweets(nativeretweets);
-    this.mutations.generateQuery();
   }
   setFilterLinks(links: boolean) {
     this.mutations.setFilterLinks(links);
-    this.mutations.generateQuery();
   }
   setFilterVerified(verified: boolean) {
     this.mutations.setFilterVerified(verified);
-    this.mutations.generateQuery();
   }
   setFilterHashTags(hashtags: boolean) {
     this.mutations.setFilterHashTags(hashtags);
-    this.mutations.generateQuery();
   }
 }
 
