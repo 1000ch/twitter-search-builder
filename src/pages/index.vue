@@ -373,10 +373,10 @@ export default Vue.extend({
     new Clipboard('#copy');
 
     const queryStore = queryModule.context(this.$store);
-    queryStore.state.rehydrate();
+    queryStore.actions.rehydrate();
 
     window.addEventListener('beforeunload', () => {
-      queryStore.state.dehydrate();
+      queryStore.actions.dehydrate();
     });
   }
 });
