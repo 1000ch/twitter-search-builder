@@ -1,4 +1,4 @@
-import { Configuration as NuxtConfig } from '@nuxt/types';
+import { NuxtConfig } from '@nuxt/types';
 
 const nuxtConfig: NuxtConfig = {
   mode: 'spa',

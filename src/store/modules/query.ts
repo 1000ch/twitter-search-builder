@@ -40,30 +40,6 @@ class QueryState {
     verified: false,
     hashtags: false
   };
-
-  asObject(): QueryState {
-    return Object.assign({}, this);
-  }
-
-  dehydrate() {
-    const object = this.asObject();
-    localStorage.setItem('data', JSON.stringify(object));
-
-    logger.info('dehydrated', object);
-  }
-
-  rehydrate(): void {
-    const data = localStorage.getItem('data');
-
-    if (data) {
-      const object = JSON.parse(data);
-      Object.assign(this, object);
-
-      logger.info('rehydrated', object);
-    } else {
-      this.dehydrate();
-    }
-  }
 }
 
 class QueryGetters extends Getters<QueryState> {
@@ -96,6 +72,9 @@ class QueryGetters extends Getters<QueryState> {
   }
   get filter(): object {
     return this.state.filter;
+  }
+  get asObject(): QueryState {
+    return Object.assign({}, this.state);
   }
 }
 
@@ -234,6 +213,45 @@ class QueryActions extends Actions<QueryState, QueryGetters, QueryMutations, Que
   }
   setFilterHashTags(hashtags: boolean) {
     this.mutations.setFilterHashTags(hashtags);
+  }
+  dehydrate(): void {
+    const object = this.getters.asObject;
+    localStorage.setItem('data', JSON.stringify(object));
+
+    logger.info('dehydrated', object);
+  }
+  rehydrate(): void {
+    const data = localStorage.getItem('data');
+
+    if (data) {
+      const object = JSON.parse(data) as QueryState;
+      this.mutations.setUseUser(object.useUser);
+      this.mutations.setUseSince(object.useSince);
+      this.mutations.setUseUntil(object.useUntil);
+      this.mutations.setUseFilter(object.useFilter);
+      this.mutations.setText(object.text);
+      this.mutations.setFrom(object.from);
+      this.mutations.setTo(object.to);
+      this.mutations.setSince(object.since);
+      this.mutations.setUntil(object.until);
+      this.mutations.setFilterPositive(object.filter.positive);
+      this.mutations.setFilterNegative(object.filter.negative);
+      this.mutations.setFilterQuestion(object.filter.question);
+      this.mutations.setFilterImages(object.filter.images);
+      this.mutations.setFilterVideos(object.filter.videos);
+      this.mutations.setFilterNews(object.filter.news);
+      this.mutations.setFilterSafe(object.filter.safe);
+      this.mutations.setFilterReplies(object.filter.replies);
+      this.mutations.setFilterRetweets(object.filter.retweets);
+      this.mutations.setFilterNativeRetweets(object.filter.nativeretweets);
+      this.mutations.setFilterLinks(object.filter.links);
+      this.mutations.setFilterVerified(object.filter.verified);
+      this.mutations.setFilterHashTags(object.filter.hashtags);
+
+      logger.info('rehydrated', this.state);
+    } else {
+      this.dehydrate();
+    }
   }
 }
 
