@@ -15,7 +15,7 @@
     "@nuxtjs/vuetify": "^1.10.3",
     "clipboard": "^2.0.4",
     "nuxt": "^2.14.3",
-    "vuex-smart-module": "^0.4.4"
+    "vuex-smart-module": "^0.4.5"
   },
   "devDependencies": {
     "@nuxt/types": "^2.14.3",
