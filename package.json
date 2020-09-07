@@ -11,7 +11,7 @@
     "generate": "nuxt-ts generate"
   },
   "dependencies": {
-    "@nuxt/typescript-runtime": "^1.0.0",
+    "@nuxt/typescript-runtime": "^2.0.0",
     "@nuxtjs/vuetify": "^1.10.3",
     "clipboard": "^2.0.4",
     "nuxt": "^2.14.4",
