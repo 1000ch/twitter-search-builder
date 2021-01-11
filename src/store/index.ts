@@ -1,5 +1,5 @@
-import { Module } from 'vuex-smart-module';
-import { queryModule } from './modules/query';
+import {Module} from 'vuex-smart-module';
+import {queryModule} from './modules/query';
 
 export const root = new Module({
   modules: {
@@ -7,4 +7,4 @@ export const root = new Module({
   }
 });
 
-export const { state, getters, mutations, actions, modules, plugins } = root.getStoreOptions();
+export const {state, getters, mutations, actions, modules, plugins} = root.getStoreOptions();

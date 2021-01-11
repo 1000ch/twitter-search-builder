@@ -21,34 +21,30 @@ const getLogLevel = (env: string | undefined) => {
 
 const logLevel = getLogLevel(process.env.NODE_ENV);
 
-export default class Logger {
-  static debug(message: any, ...args: any[]) {
+export const logger = {
+  debug(message: any, ...args: any[]) {
     if (logLevel <= LogLevel.DEBUG) {
       consola.debug(message, ...args);
     }
-  }
-
-  static info(message: any, ...args: any[]) {
+  },
+  info(message: any, ...args: any[]) {
     if (logLevel <= LogLevel.INFO) {
       consola.info(message, ...args);
     }
-  }
-
-  static warn(message: any, ...args: any[]) {
+  },
+  warn(message: any, ...args: any[]) {
     if (logLevel <= LogLevel.WARN) {
       consola.warn(message, ...args);
     }
-  }
-
-  static error(message: any, ...args: any[]) {
+  },
+  error(message: any, ...args: any[]) {
     if (logLevel <= LogLevel.ERROR) {
       consola.error(message, ...args);
     }
-  }
-
-  static fatal(message: any, ...args: any[]) {
+  },
+  fatal(message: any, ...args: any[]) {
     if (logLevel <= LogLevel.FATAL) {
       consola.fatal(message, ...args);
     }
   }
-}
+};
