@@ -1,7 +1,7 @@
 import {NuxtConfig} from '@nuxt/types';
 
 const nuxtConfig: NuxtConfig = {
-  mode: 'spa',
+  ssr: false,
   srcDir: 'src',
   head: {
     title: 'Twitter Search Builder',
