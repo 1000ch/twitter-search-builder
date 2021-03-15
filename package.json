@@ -25,7 +25,7 @@
     "vuex-smart-module": "^0.5.0"
   },
   "devDependencies": {
-    "@nuxt/types": "^2.15.0",
+    "@nuxt/types": "^2.15.3",
     "@nuxt/typescript-build": "^2.0.4",
     "@types/clipboard": "^2.0.1",
     "@types/node": "^14.14.22",
