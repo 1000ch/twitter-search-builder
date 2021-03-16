@@ -1,5 +1,5 @@
 import {Getters, Mutations, Actions, Module, createMapper} from 'vuex-smart-module';
-import {logger} from '~/util/logger.ts';
+import {logger} from '~/util/logger';
 
 class QueryState {
   useUser = true;
