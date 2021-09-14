@@ -1,4 +1,5 @@
-import process from 'node:process';
+// eslint-disable-next-line unicorn/prefer-node-protocol
+import process from 'process';
 import {NuxtConfig} from '@nuxt/types';
 
 const nuxtConfig: NuxtConfig = {
