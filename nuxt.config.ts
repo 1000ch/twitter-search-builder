@@ -1,3 +1,4 @@
+import process from 'node:process';
 import {NuxtConfig} from '@nuxt/types';
 
 const nuxtConfig: NuxtConfig = {
@@ -12,13 +13,13 @@ const nuxtConfig: NuxtConfig = {
       {property: 'og:title', content: 'Twitter Search Builder'},
       {property: 'og:description', content: 'GUI Tool to build a search query for Twitter'},
       {property: 'og:url', content: 'https://twitter-search-builder.netlify.com/'},
-      {property: 'twitter:card', content: 'summary'}
-    ]
+      {property: 'twitter:card', content: 'summary'},
+    ],
   },
   buildModules: [
     '@nuxt/typescript-build',
-    '@nuxtjs/vuetify'
-  ]
+    '@nuxtjs/vuetify',
+  ],
 };
 
 export default nuxtConfig;

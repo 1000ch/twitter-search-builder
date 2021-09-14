@@ -1,3 +1,4 @@
+import process from 'node:process';
 import consola from 'consola';
 
 export enum LogLevel {
@@ -5,7 +6,7 @@ export enum LogLevel {
   INFO,
   WARN,
   ERROR,
-  FATAL
+  FATAL,
 }
 
 const getLogLevel = (env: string | undefined) => {
@@ -46,5 +47,5 @@ export const logger = {
     if (logLevel <= LogLevel.FATAL) {
       consola.fatal(message, ...args);
     }
-  }
+  },
 };

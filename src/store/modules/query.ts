@@ -38,7 +38,7 @@ class QueryState {
     nativeretweets: false,
     links: false,
     verified: false,
-    hashtags: false
+    hashtags: false,
   };
 }
 
@@ -313,7 +313,7 @@ export const queryModule = new Module({
   state: QueryState,
   getters: QueryGetters,
   mutations: QueryMutations,
-  actions: QueryActions
+  actions: QueryActions,
 });
 
 export const queryMapper = createMapper(queryModule);
