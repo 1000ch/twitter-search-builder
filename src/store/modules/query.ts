@@ -26,20 +26,20 @@ class QueryState {
     verified: boolean;
     hashtags: boolean;
   } = {
-    positive: false,
-    negative: false,
-    question: false,
-    images: false,
-    videos: false,
-    news: false,
-    safe: false,
-    replies: false,
-    retweets: false,
-    nativeretweets: false,
-    links: false,
-    verified: false,
-    hashtags: false,
-  };
+      positive: false,
+      negative: false,
+      question: false,
+      images: false,
+      videos: false,
+      news: false,
+      safe: false,
+      replies: false,
+      retweets: false,
+      nativeretweets: false,
+      links: false,
+      verified: false,
+      hashtags: false,
+    };
 }
 
 class QueryGetters extends Getters<QueryState> {
